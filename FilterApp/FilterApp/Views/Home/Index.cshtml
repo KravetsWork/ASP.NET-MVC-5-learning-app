@@ -1,0 +1,46 @@
+﻿@model FilterApp.Models.PlayerListViewModel
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<form method="get">
+    <div class="form-inline">
+        <label class="control-label">Team: </label>
+        @Html.DropDownList("team", Model.Teams as SelectList,
+                    htmlAttributes: new { @class = "form-control"})
+
+        <label class="control-label">Position</label>
+        @Html.DropDownList("position", Model.Positions as SelectList,
+                    htmlAttributes: new { @class = "form-control" })
+
+        <input type="submit" value="Filter" class="btn btn-default" />
+    </div>
+</form>
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Position</th>
+        <th>Team</th>
+    </tr>
+
+    @foreach (var item in Model.Players)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Position)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Team.Name)
+            </td>
+        </tr>
+    }
+</table>

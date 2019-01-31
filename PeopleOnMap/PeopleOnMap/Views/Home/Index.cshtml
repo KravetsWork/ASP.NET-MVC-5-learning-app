@@ -1,0 +1,50 @@
+﻿@model IEnumerable<PeopleOnMap.Models.Person>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Карта программистов</h2>
+
+<script type="text/javascript" 
+        src="https://maps.google.com/maps/api/js?key=AIzaSyCmorpN8D2Cbn_DLE5JVXUdOd9i72Y-k_o">
+</script>
+
+<div id="mapCanvas" style="width: 100%; height: 500px">
+
+</div>
+
+<script type="text/javascript">
+
+    var map = new google.maps.Map(
+        document.getElementById('mapCanvas'),
+        {
+            zoom: 4,
+            center: new google.maps.LatLng(48.27, 35.1)
+        }
+    );
+
+    function showMarker(lat, lng, text, photo)
+    {
+        new google.maps.Marker({
+            position: new google.maps.LatLng(lat, lng),
+            title: text,
+            icon: {
+                url: photo,
+                scaledSize: new google.maps.Size(50, 50),
+            },
+            map: map
+        });
+    }
+    @foreach (var person in Model)
+    {
+        <text>
+    showMarker('@person.lat',
+               '@person.lng',
+               '@person.name / @person.address',
+               '@person.photo');
+        </text>
+    }
+</script>
+
+

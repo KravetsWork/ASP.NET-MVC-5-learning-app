@@ -1,0 +1,28 @@
+﻿@model ManyToManyApp.Models.Student
+@using ManyToManyApp.Models
+@{
+    ViewBag.Title = "Create";
+}
+@using (Html.BeginForm())
+{
+    <h4>Create</h4>
+
+    <div class="display-label"><b>Name</b></div>
+    <div class="display-field">
+        @Html.EditorFor(model => model.Name)
+    </div>
+
+    <div class="display-label"><b>Surname</b></div>
+    <div class="display-field">
+        @Html.EditorFor(model => model.Surname)
+    </div>
+
+    <div class="display-label"><b>Course</b></div>
+    foreach (Course c in ViewBag.Courses)
+    {
+        <input type="checkbox" name="selectedCourses" value="@c.Id" />@c.Name<br />
+    }
+    <p>
+        <input type="submit" value="save" />
+    </p>
+}
